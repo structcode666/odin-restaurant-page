@@ -1,3 +1,6 @@
+import {imageArray} from "./menuItems"
+
+
 export function menuPageLoad(){
 
     const menuButton = document.querySelector(".menu-button")
@@ -14,43 +17,70 @@ export function menuPageLoad(){
         content.style.height = "100%"
         contentSection.appendChild(content);
 
-        const menuCard = document.createElement("div");
-        menuCard.classList.add('menu-card-1')
-        menuCard.style.width = "300px"
-        menuCard.style.height = "500px"
-        menuCard.style.border = '2px solid red';
-        content.appendChild(menuCard)
+        const totalMenuItems = 5
 
-        const menuCardTwo = document.createElement("div");
-        menuCardTwo.classList.add('menu-card-1')
-        menuCardTwo.style.width = "300px"
-        menuCardTwo.style.height = "300px"
-        menuCardTwo.style.border = '2px solid red';
-        content.appendChild(menuCardTwo)
+
+        for(let i=0; i<totalMenuItems; i++){
+            const card = new createMenuCard(`menuCard`)
+            card.createCard();
+            card.appendToDOM(content);
+            card.addImage(imageArray[i].cardImage)
+            card.addCardContent(imageArray[i].cardTitle, imageArray[i].cardPrice)
+        }
+
+        // const testCard = new createMenuCard("test-card");
+        // testCard.createCard();
+        // testCard.appendToDOM(content)
+        // testCard.addImage(imageArray[0].cardImage)
+        // testCard.addCardContent(imageArray[0].cardTitle, imageArray[0].cardPrice)
+
     })
 
 }
 
 class createMenuCard{
-    constructor(cardName, cardWidth, cardHeight){
+    constructor(cardName){
         this.cardName = cardName;
-        this.cardWidth = cardWidth;
-        this.cardHeight = cardHeight
+
+        this.card = document.createElement("div");
     }
 
     createCard(){
-        return menuCard = document.createElement("div")
+        this.card.classList.add(`${this.cardName}`)
+        this.card.style.width = "400px";
+        this.card.style.height = "400px";
+
+        return this.card
     }
 
-    setCardClass(){
-        return menucard.classList.add(`${this.cardName}`)
+    addImage(imageURL){
+
+        const image = document.createElement("img");
+        image.src = imageURL;
+        this.card.appendChild(image)
     }
 
-    setCardStyles(){
-        menuCard.style.width = ""
+    addCardContent(cardContentText, cardPriceText){
+
+        const cardContent = document.createElement("h2")
+        cardContent.textContent  = cardContentText;
+
+        const cardPrice  = document.createElement("h3")
+        cardPrice.textContent = cardPriceText
+
+        this.card.appendChild(cardContent);
+        this.card.appendChild(cardPrice)
+    }
+        
+
+    appendToDOM(parent){
+
+        parent.appendChild(this.card)
+    }
+    
+
     }
     
 
     
 
-}

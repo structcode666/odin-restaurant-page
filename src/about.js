@@ -7,9 +7,14 @@ export function aboutPageLoad(){
         const contentSection = document.querySelector("#content")
         contentSection.textContent = "";
 
-        const content = document.createElement("div")
-        content.textContent = "this is where my about items go";
-        content.classList.add('about')
-        contentSection.appendChild(content);
+        const aboutContent = document.createElement("div")
+        aboutContent.textContent = "";
+        aboutContent.classList.add('about')
+        contentSection.appendChild(aboutContent);
+
+        const contactDetail = document.createElement("h2")
+        contactDetail.textContent = "CALL TO 12345678 FOR A BOOKING"
+        contactDetail.classList.add('contact-details')
+        aboutContent.appendChild(contactDetail)
     })
 }
